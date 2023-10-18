@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
         
 
-    <title>{{ $title ?? 'PokePal }}</title>
+    <title>{{ $title ?? 'PokePal' }}</title>
         
    
 
@@ -40,11 +40,15 @@
         $err = curl_error($curl);
         curl_close($curl);
         $response = json_decode($response, true);
+
+
     @endphp
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-            <img src="{{ $response['sprites']['front_default'] }}" class="" alt="" width="50" height="50">
+                @if($response != null)
+                    <img src="{{ $response['sprites']['front_default'] }}" class="" alt="" width="50" height="50">
+                @endif
                 <a class="navbar-brand" href="{{ url('/') }}">
                     PokePal
                 </a>
@@ -74,8 +78,10 @@
                                 </li>
                             @endif
                             
-                        @else
-                            <li class="nav-item dropdown">
+                    
+                            
+                        @endguest
+                        <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-item" href="{{ route('region-page', ['region' => 'kanto']) }}">Kanto</a>
                             </li>
                             <li class="nav-item dropdown">
@@ -100,7 +106,6 @@
                                     </form>
                                 </div>
                             </li>
-                        @endguest
                     </ul>
                 </div>
             </div>
