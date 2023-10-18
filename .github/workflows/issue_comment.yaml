@@ -14,7 +14,7 @@ jobs:
      - name: create comment
        uses: peter-evans/create-or-update-comment@v1
        with:
-         issue-numeber: ${{github.event.issue.number}}
+         issue-number: ${{github.event.issue.number}}
          body: |
            This is multi-line test comment
            - with Github **MARKDOWN**
